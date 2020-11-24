@@ -1,0 +1,34 @@
+version: "3.7"
+
+services:
+  # gui:
+  #   build:
+  #     context: "./services/gui"
+  #     dockerfile: Dockerfile
+
+  job-generator:
+    build:
+      context: "./services/job-generator"
+      dockerfile: Dockerfile
+    depends_on:
+      - queue
+    ports:
+      - "5000:5000"
+    volumes:
+      - "./services/job-generator:/app"
+
+  queue:
+    image: redis:alpine
+    ports:
+      - "6379:6379"
+
+  job-puller:
+    build:
+      context: "./services/job-puller"
+      dockerfile: Dockerfile
+    depends_on:
+      - queue
+    volumes:
+      - "./services/job-puller:/app"
+
+
