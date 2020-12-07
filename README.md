@@ -24,12 +24,9 @@ This container stays running till it is terminated.
 
 After setup, you can add a sample job to the generator by typing in another terminal instance:
 
-$ curl -d '{
-    "name": "pie",
-    "action": "kpansh"
-  }' \
-  -H 'Content-Type: application/json' \
-  http://localhost:5000/add_job
+
+curl -X POST -d '{"name": "pie","action": "kpansh"}' \-H  'Content-Type: application/json' \localhost:5000/add_job
+
 
 That will send a simple POST request to the job generator, you will see this reflect in terminal where the container is running.
 
